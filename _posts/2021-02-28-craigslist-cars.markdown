@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Pridicting Car Pricing in British Columbia
+title: Pridicting Car Prices in British Columbia
 image: corolla_depreciation.png
 date: 2021-02-28 10:53:00 -0800
 tags:
