@@ -4,7 +4,7 @@ title: Pridicting Car Prices in British Columbia
 image: corolla_depreciation.png
 date: 2021-02-28 10:53:00 -0800
 tags:
-categories: Data Science Project
+categories: Project
 ---
 - Try out the live price predictor [here](https://vehicle-price-estimator.herokuapp.com/).
 - Scraped and cleaned ~37,000 Craigslist vehicle listings from southern British Columbia

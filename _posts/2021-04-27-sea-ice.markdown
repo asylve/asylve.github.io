@@ -4,7 +4,7 @@ title: Neural Net Mapping of Hudson Bay Sea Ice
 image: ice_cover.png
 date: 2021-04-27 20:22:00 -0800
 tags:
-categories: Data Science Project
+categories: Project
 ---
 -  Collected 3392 satellite images of Hudson Bay sea ice in the Canadian Arctic from 2016-1-1 to 2018-7-31
 -  Generated sea ice concentrations masks for each image using Canadian Regional Ice Chart shapefiles
