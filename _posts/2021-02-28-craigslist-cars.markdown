@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Pridicting Car Prices in British Columbia
-image: corolla_depreciation.png
+title: Predicting Car Prices in British Columbia
+image: corolla_depreciation_highres.png
 date: 2021-02-28 10:53:00 -0800
 tags:
 categories: Project
@@ -9,10 +9,10 @@ categories: Project
 - Try out the live price predictor [here](https://vehicle-price-estimator.herokuapp.com/).
 - Scraped and cleaned ~37,000 Craigslist vehicle listings from southern British Columbia
 - Trained and productionized a gradient boosting model (MAE $2,300) to predict the market value of vehicles posted on Craigslist. 
-- Trained a linear model (MAE $6,500) to predict a dollar value for important vehicle features (ie. size, fuel type, manufacturer, odometer, etc.) 
+- Trained a linear model (MAE $6,500) to predict a dollar value for important vehicle features (e.g. size, fuel type, manufacturer, odometer, etc.) 
   - Predictions indicate that diesel vehicles are worth ~$9,000 more than non-diesel vehicles, and that purchasing a vehicle directly from the owner (as apposed to a dealer) can save ~$2,000 off the asking price.
 - Exploratory Data Analysis:
-  - Found depretiation time constants for the most common vehicle models and manuacturers (ie. which vehicles 'hold their value' the best). Found Toyota, Honda, and Volkswagen depreciate the slowest, while Dodge, Chevrolet, and Ford depreciate the fastest.
+  - Found depreciation time constants for the most common vehicle models and manuacturers (e.g. which vehicles 'hold their value' the best). Found Toyota, Honda, and Volkswagen depreciate the slowest, while Dodge, Chevrolet, and Ford depreciate the fastest.
   - Produced a geographic distribution of vehicle types in the region (see below). The distribution of trucks was much flatter thoughout the region with smaller peaks around the urban centres, indicating a strong consumer preference for trucks in the suburbs.  
   - Used interpolation/smoothing to create average contours of price vs odometer reading and age. This gave a benchmark depreciation of $0.20/km driven for the region.
   - From price distribution curves, found that sellers tend to price vehicles just under round multiples of $10,000, likely as a psychological pricing strategy. 
@@ -40,17 +40,17 @@ I used the tutorial above as a basis to scrape vehicle listings from Craigslist.
 - drive (front, rear, or 4wd)
 - fuel (type of fuel)
 - latlong (latitude and longitude associated with the posting)
-- location (location associated with the posting, ie. 'Vancouver')
-- make (year make and model of the vehicle in a string, ie. '2020 Toyota Corolla')
+- location (location associated with the posting, e.g. 'Vancouver')
+- make (year make and model of the vehicle in a string, e.g. '2020 Toyota Corolla')
 - odometer (odometer reading in km)
 - paint color
 - price (in $ CAD)
 - sale type (owner or dealer)
-- title status (ie. clean, rebuilt)
+- title status (e.g. clean, rebuilt)
 - transmission (manual or automatic)
-- type (ie. sedan, minivan)
+- type (e.g. sedan, minivan)
 - cylinders (number of cylinders in the vehicles engine)
-- size (ie. full-size, compact)
+- size (e.g. full-size, compact)
 
 # 2. Data Cleaning
 
@@ -75,7 +75,7 @@ Additional cleaning steps were:
 - Split out the year, make and model of the vehicle into separate columns
 - Split out the newly created model column into a base model and modifiers (many models have modifiers at the end such as 'lxt')
 - Create an 'age' column by subtracting the current year from the 'year' column
-- Create new columns based on if the text body contained words I selected as 'positive' (ie. 'vintage') or 'negative' (ie. 'torn'). Also created a column to indicate if the text had few (less than 30) words 
+- Create new columns based on if the text body contained words I selected as 'positive' (e.g. 'vintage') or 'negative' (e.g. 'torn'). Also created a column to indicate if the text had few (less than 30) words 
 
 # 3. Exploratory Data Analysis (EDA)
 
@@ -89,9 +89,9 @@ Price distribution for all of the vehichles. The overall distribution is skewed 
 
 ![Price Density](/images/price_density.png)
 
-Probability density of price for sedans, SUVs, and Trucks. The curves have been noramlized so the area under each curve is 1. Sedans are the most skewed to the low price end. SUVs and trucks have lower end options (under $10,000) but are also commonly found in the $30,000-$40,000 range. The psychological strategy of pricing just under multiples of $10,000 is more apparent here. This might be a good selling strategy if buyers use the pricing filter on their search with a bands at a round numbers.
+Probability density of price for sedans, SUVs, and Trucks. The curves have been noramlized so the area under each curve is 1. Sedans are the most skewed to the low price end. SUVs and trucks have lower end options (under $10,000) but are also commonly found in the $30,000-$40,000 range. The psychological strategy of pricing just under multiples of $10,000 is more apparent here. This might be a good selling strategy if buyers use the pricing filter their search with a bands at round numbers.
 
-Another interesting feature is the dip in trucks between $15,000 and $30,000, this may indicate there is less turnover in trucks for this price. Perhaps this means people are happy with their trucks in this range, so if you find one it could be a good buy. The mean year and odometer reading for trucks in this price range is 2010 and 170,000km, so if you find something this this it might be a good buy.
+Another interesting feature is the dip in trucks between $15,000 and $30,000, this may indicate there is less turnover in trucks for this price. The mean year and odometer reading for trucks in this price range is 2010 and 170,000km. Perhaps this means people are happy with their trucks in this range, so if you find one it could be a good buy.
 
 ## 3.2 Price Distribution by Odometer and Year
 
@@ -114,9 +114,9 @@ The arrow on the plot indicates the depreciation for a vehicle driven 13,100 km 
 
 ## 3.4 Depreciation of the Most Popular Vehicles
 When buying a car, you are not only interested in the current price, but the future price you might be able to sell it for. Here we will fit a decaying exponential function to individual model of vehicle to quantify the depreciation of that model over time. This will tell us if that model 'holds its value'. Below is the fit for the Toyota Corolla data.
-![corolla_depreciation](/images/corolla_depreciation.png)
+![corolla_depreciation](/images/corolla_depreciation_highres.png)
 
-By aggrigating the depreciation time constant for the top 10 vehicles under each manufacturer, we can get an idea of which manufacturers hold their value the best. As shown below Toyotas lead the pack with a median time of about 2.1 years for a vehicle to depreciate 20%. Meanwhile a Dodge would only take 1.5 years to depreciate the same fraction. There is still large variability within manufacturers, so it is likely best to determine the depreciation value for the individual model in question when considering a purchase.
+By aggregating the depreciation time constant for the top 10 vehicles under each manufacturer, we can get an idea of which manufacturers hold their value the best. As shown below Toyotas lead the pack with a median time of about 2.1 years for a vehicle to depreciate 20%. Meanwhile a Dodge would only take 1.5 years to depreciate the same fraction. There is still large variability within manufacturers, so it is likely best to determine the depreciation value for the individual model in question when considering a purchase.
 
 ![deprecition_by_manufacturer](/images/deprecition_by_manufacturer.png)
 

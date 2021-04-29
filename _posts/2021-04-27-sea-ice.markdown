@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Neural Net Mapping of Hudson Bay Sea Ice
-image: ice_cover.png
+image: ice_cover_highres.png
 date: 2021-04-27 20:22:00 -0800
 tags:
 categories: Project
@@ -141,13 +141,24 @@ The neural network above was trained for 100 epochs (where an epoch is a run thr
 |:--:|
 | *Model performance over training epochs* |
 
-The lowest validation data loss is achieved after roughly 50 epochs, after which the model begins to over-train. The model weights at this 'optimal' point were saved and used for the final model. A confusion matrix with these weights is below. The model is very good at preicting open water and land, and somewhat poorer at predicting the intermediate ice concentrations (10-90%). This could almost certainly be improved by collecting more images with these intermediate ice concentrations, which would be best achieved by focusing data collection on the springtime/early summer months when the ice is thawing.
+The lowest validation data loss is achieved after roughly 50 epochs, after which the model begins to over-train. The model weights at this 'optimal' point were saved and used for the final model. A confusion matrix with these weights is below. The model is very good at predicting open water and land, and somewhat poorer at predicting the intermediate ice concentrations (10-90%). This could almost certainly be improved by collecting more images with these intermediate ice concentrations, which would be best achieved by focusing data collection on the springtime/early summer months when the ice is thawing.
 
 |<img src="/images/confusion_matrix.png" width="600" />   |
 |:--:|
 | *Final model confusion matrix for validation data* |
 
 A series of validation data images, true masks, and predicted masks are shown below. The class imbalance of the dataset is apparent here, with land and solid ice dominating many of the images. Nevertheless the model is able to provide a good prediction of localized ice concentration in many cases. It is also interesting to note that the model provides finer detail than the published ice charts. With additional training data, perhaps algorith such as this could be used to develop finer-detailed ice charts than are curently available. 
+
+The class definitions from section 2.1 are repeated here for reference:
+
+- 7: land
+- 6: fast ice (thick ice that is 'fastened' to the coastline)
+- 5: 90-100% ice
+- 4: 70-90% ice
+- 3: 50-70% ice
+- 2: 30-50% ice
+- 1: 10-30% ice
+- 0: <10% ice
 
 <p float="left">
   <img src="/images/pred1.png" width="600" /> 
